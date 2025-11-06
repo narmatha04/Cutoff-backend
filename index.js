@@ -22,6 +22,7 @@ cron.schedule("0 9 * * *", () => {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
+
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS
   }
@@ -30,7 +31,8 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 app.use(cors({
-    origin: "https://cutoffnow.vercel.app/"
+    origin: ["https://cutoffnow.vercel.app/", "http://localhost:5500"],
+    methods: "GET,POST,PUT,DELETE"
   }));
 app.use(bodyParser.json());
 
