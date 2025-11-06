@@ -30,7 +30,7 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 app.use(cors({
-    origin: "*"
+    origin: "https://cutoffnow.vercel.app/"
   }));
 app.use(bodyParser.json());
 
