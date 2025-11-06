@@ -31,15 +31,17 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 app.use(cors({
-    origin: ["https://cutoffnow.vercel.app/", "http://localhost:5500"],
-    methods: "GET,POST,PUT,DELETE"
+    origin: ["https://cutoffnow.vercel.app", "http://localhost:5500"],
+    methods: ["GET,POST,PUT,DELETE"],
+    allowedHeaders: ["Content-Type"]
   }));
 app.use(bodyParser.json());
 
 // --- Google Auth Setup ---
 const auth = new google.auth.GoogleAuth({
-    credentials: JSON.parse(fs.readFileSync("credentials.json", "utf8")),
+    keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
     scopes: ["https://www.googleapis.com/auth/spreadsheets"]
+    
   });
   
   let sheets;
