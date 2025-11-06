@@ -14,7 +14,7 @@ import fetch from "node-fetch";
 // Run reminder job every day at 9 AM
 cron.schedule("0 9 * * *", () => {
     console.log("⏰ Running daily reminder check...");
-    fetch("http://localhost:5001/sendReminders")
+    fetch("https://cutoff-backend-7q70.onrender.com/sendReminders")
       .then(() => console.log("✅ Daily reminders executed"))
       .catch(err => console.error("⚠️ Reminder error:", err));
   });
@@ -29,7 +29,9 @@ const transporter = nodemailer.createTransport({
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "*"
+  }));
 app.use(bodyParser.json());
 
 // --- Google Auth Setup ---
@@ -292,5 +294,5 @@ app.delete("/deleteSubscription/:row", async (req, res) => {
   
   
 // Start server
-app.listen(5001, () => console.log("🚀 Backend running on http://localhost:5001"));
+app.listen(5001, () => console.log("🚀 Backend running on https://cutoff-backend-7q70.onrender.com/"));
 
